@@ -14,14 +14,59 @@ struct QuizView: View {
     @State var difficulty: String
     @State var category: Category
     
+    @State var rights: [Int] = [0,0,0,0,0,0,0,0,0,0]
+    @State var currentQuestion = 0
+    @State var isAnswerShown = false
+    
+    init(difficulty: String, category: Category, currentQuestion: Int = 0, isAnswerShown: Bool = false) {
+     
+        self.difficulty = difficulty
+        self.category = category
+        self.currentQuestion = currentQuestion
+        self.isAnswerShown = isAnswerShown
+    }
     
     
     var body: some View {
         VStack{
-            Text(category.name)
-            Text(String(category.id))
-            Text(difficulty)
-            Text("Next step quizing")
+//            Text(category.name)
+//            Text(String(category.id))
+//            Text(difficulty)
+//            Text("Next step quizing")
+            Text(isAnswerShown ? "Hvis svar" : "")
+            Text("Question \(currentQuestion+1):")
+            HStack{
+                Button(){
+                    currentQuestion += 1
+
+                }label: {
+                    Text("1:")
+                }
+                .buttonStyle(.bordered)
+                Button(){
+                    currentQuestion += 1
+
+                }label: {
+                    Text("2:")
+                }
+                .buttonStyle(.bordered)
+            }
+            HStack{
+                Button(){
+                    currentQuestion += 1
+                }label: {
+                    
+                    Text("3:")
+                }
+                .buttonStyle(.bordered)
+                Button(){
+                    currentQuestion += 1
+                }label: {
+                    Text("4:")
+                }
+                .buttonStyle(.bordered)
+                
+            }
         }
         
     }
@@ -30,6 +75,6 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
         QuizView(difficulty: "easy", category: Category(9, "General Knowledge"))
-            .environmentObject(QuizController())
+            .environmentObject(QuizController()).preferredColorScheme(.dark)
     }
 }
