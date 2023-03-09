@@ -18,10 +18,10 @@ struct QuizMenuView: View {
         case medium = "medium"
         case hard = "hard"
     }
-     
-    @State var isSubmitted = false
-    
+         
     @State private var selectedDifficulty = Difficulty.easy
+    
+    @State var isQuestionsFetched: Bool = false
     
     var body: some View {
         NavigationView{
@@ -49,12 +49,18 @@ struct QuizMenuView: View {
                         .frame(alignment: .center)
                     }
                     Button(action: {
-                        quizController.fetchQuitions(categoryNr: String(selectedOption) , difficulty: selectedDifficulty.rawValue)
+                        Task{
+                            await quizController.fetchQuitions(categoryNr: String(selectedOption) , difficulty: selectedDifficulty.rawValue)
+                        }
                     }) {
-                        NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption))) {
-                            Text("Go to Detail View")
+                        NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption)), isActive: $isQuestionsFetched != nil) {
+                            Text("Start Quiz")
                         }
                     }
+                    .padding(15)
+                    .foregroundColor(Color.white)
+                    .background(Color.accentColor)
+                    .cornerRadius(5)
                     //                    Button{
                     //                        isSubmitted = true
                     //                        NavigationLink{

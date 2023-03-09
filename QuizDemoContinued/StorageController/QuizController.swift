@@ -48,12 +48,12 @@ class QuizController: ObservableObject{
         }
     }
     
-    func fetchQuitions(categoryNr: String, difficulty: String){
+    func fetchQuitions(categoryNr: String, difficulty: String) async {
         Task(priority: .background){
             guard let url = URL(string: "https://opentdb.com/api.php?amount=10&\(categoryNr)=10&difficulty=\(difficulty)") else {return}
             guard let rawCategorieData = await NetworkService.getData(url) else {return}
             let decoder = JSONDecoder()
-            do{
+            do {
                 let result = try decoder.decode(QuestionList.self, from: rawCategorieData)
                 questions = result.results
             } catch {
@@ -61,6 +61,25 @@ class QuizController: ObservableObject{
             }
         }
     }
+    
+    func getQuestionFromIndex(_ index: Int) -> [String] {
+        var questionsList: [String] = questions[index].incorrectAnswer
+        questionsList.append(questions[index].correctAnswer)
+//        for a in questions[index].incorrectAnswer {
+//            questionsList.append(a)
+//        }
+        questionsList.shuffle()
+        return questionsList
+    }
+    
+    func checkIfThisAnswerIsCorrect(_ answer: String, _ index: Int) -> Bool {
+        return questions[index].correctAnswer==answer
+    }
+    
+    func getQuestion(_ index: Int) -> String {
+        return questions[index].question
+    }
+    
     
 
     

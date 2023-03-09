@@ -14,12 +14,14 @@ struct QuizView: View {
     @State var difficulty: String
     @State var category: Category
     
+    @State private var outputString: String = ""
+    
     @State var rights: [Int] = [0,0,0,0,0,0,0,0,0,0]
     @State var currentQuestion = 0
     @State var isAnswerShown = false
     
     init(difficulty: String, category: Category, currentQuestion: Int = 0, isAnswerShown: Bool = false) {
-     
+        
         self.difficulty = difficulty
         self.category = category
         self.currentQuestion = currentQuestion
@@ -29,23 +31,31 @@ struct QuizView: View {
     
     var body: some View {
         VStack{
-//            Text(category.name)
-//            Text(String(category.id))
-//            Text(difficulty)
-//            Text("Next step quizing")
-            Text(isAnswerShown ? "Hvis svar" : "")
-            Text("Question \(currentQuestion+1):")
+            //            Text(category.name)
+            //            Text(String(category.id))
+            //            Text(difficulty)
+            //            Text("Next step quizing")
+            HStack{
+//                    Text("Question \(currentQuestion+1): \(quizController.questions[currentQuestion].question)")
+//                        .font(.title)
+//                        .padding()
+                
+                
+            }
+            
+            
+            
             HStack{
                 Button(){
                     currentQuestion += 1
-
+                    
                 }label: {
                     Text("1:")
                 }
                 .buttonStyle(.bordered)
                 Button(){
                     currentQuestion += 1
-
+                    
                 }label: {
                     Text("2:")
                 }
@@ -68,7 +78,6 @@ struct QuizView: View {
                 
             }
         }
-        
     }
 }
 
