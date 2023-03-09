@@ -53,7 +53,10 @@ struct QuizMenuView: View {
                             await quizController.fetchQuitions(categoryNr: String(selectedOption) , difficulty: selectedDifficulty.rawValue)
                         }
                     }) {
-                        NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption)), isActive: $isQuestionsFetched != nil) {
+                        NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption))
+//                                       , isActive: $isQuestionsFetched != nil
+                        )
+                        {
                             Text("Start Quiz")
                         }
                     }
