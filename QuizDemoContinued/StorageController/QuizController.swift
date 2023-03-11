@@ -34,7 +34,6 @@ class QuizController: ObservableObject{
     
 
     func fetchCategories(){
-        
         Task(priority: .high){
             guard let url = URL(string: "https://opentdb.com/api_category.php") else {return}
             guard let rawCategorieData = await NetworkService.getData(url) else {return}
@@ -43,7 +42,7 @@ class QuizController: ObservableObject{
                 let result = try decoder.decode(CategoryList.self, from: rawCategorieData)
                 categories = result.results
             } catch {
-                fatalError("JOEMAMA_")
+                fatalError("Error")
             }
         }
     }
@@ -57,12 +56,12 @@ class QuizController: ObservableObject{
                 let result = try decoder.decode(QuestionList.self, from: rawCategorieData)
                 questions = result.results
             } catch {
-                fatalError("JOEMAMA_")
+                fatalError("Error")
             }
         }
     }
     
-    func getQuestionFromIndex(_ index: Int) -> [String] {
+    func getAnswersFromIndex(_ index: Int) -> [String] {
         var questionsList: [String] = questions[index].incorrectAnswer
         questionsList.append(questions[index].correctAnswer)
 //        for a in questions[index].incorrectAnswer {

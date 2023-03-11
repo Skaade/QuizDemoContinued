@@ -50,8 +50,8 @@ struct QuizMenuView: View {
                     }
                     Button(action: {
                         Task{
-                            await quizController.fetchQuitions(categoryNr: String(selectedOption) , difficulty: selectedDifficulty.rawValue)
-                        }
+                            await quizController.fetchQuitions(categoryNr: String(selectedOption), difficulty: selectedDifficulty.rawValue) }
+                        
                     }) {
                         NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption))
 //                                       , isActive: $isQuestionsFetched != nil
