@@ -15,12 +15,12 @@ struct Question: Codable {
     enum CodingKeys: String, CodingKey {
         case question
         case correctAnswer = "correct_answer"
-        case incorrectAnswer = "incorrect_answer"
+        case incorrectAnswer = "incorrect_answers"
     }
     
-    init(question: String, correctAnswer: String, incorrectAnswer: [String]) {
-        self.question = question
-        self.correctAnswer = correctAnswer
-        self.incorrectAnswer = incorrectAnswer
-    }
+//    init(question: String, correctAnswer: String, incorrectAnswer: [String]) {
+//        self.question = question
+//        self.correctAnswer = correctAnswer
+//        self.incorrectAnswer = incorrectAnswer
+//    }
 }

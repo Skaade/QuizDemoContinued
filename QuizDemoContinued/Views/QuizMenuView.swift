@@ -33,7 +33,7 @@ struct QuizMenuView: View {
                     Picker("Select an categorie:",selection: $selectedOption) {
                         ForEach(quizController.categories) { cate in
                             Text(cate.name)
-                        }
+                        } 
                     }
                     .pickerStyle(.menu)
                     
@@ -50,11 +50,13 @@ struct QuizMenuView: View {
                     }
                     Button(action: {
                         Task{
-                            await quizController.fetchQuitions(categoryNr: String(selectedOption), difficulty: selectedDifficulty.rawValue) }
+            
+                        }
+                        
                         
                     }) {
                         NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption))
-//                                       , isActive: $isQuestionsFetched != nil
+                            
                         )
                         {
                             Text("Start Quiz")

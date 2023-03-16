@@ -17,6 +17,7 @@ class NetworkService {
         if httpResponse.statusCode != 200 {
             fatalError("Error")
         }
+        print(data)
         return data
     }
 }

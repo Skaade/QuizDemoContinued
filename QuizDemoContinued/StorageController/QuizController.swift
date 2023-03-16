@@ -12,11 +12,12 @@ import Foundation
 class QuizController: ObservableObject{
     @Published var categories: [Category] = [Category(0,"")]
     @Published var questions: [Question] = []
-
     
-    init(){
+    
+    init() {
         fetchCategories()
         print(categories.count)
+        fetchQuitions(categoryNr: "9", difficulty: "hard")
         
     }
     
@@ -32,7 +33,7 @@ class QuizController: ObservableObject{
         return temCategory
     }
     
-
+    
     func fetchCategories(){
         Task(priority: .high){
             guard let url = URL(string: "https://opentdb.com/api_category.php") else {return}
@@ -47,26 +48,27 @@ class QuizController: ObservableObject{
         }
     }
     
-    func fetchQuitions(categoryNr: String, difficulty: String) async {
-        Task(priority: .background){
-            guard let url = URL(string: "https://opentdb.com/api.php?amount=10&\(categoryNr)=10&difficulty=\(difficulty)") else {return}
-            guard let rawCategorieData = await NetworkService.getData(url) else {return}
-            let decoder = JSONDecoder()
+    func fetchQuitions(categoryNr: String, difficulty: String) {
+        Task(priority: .high){
             do {
-                let result = try decoder.decode(QuestionList.self, from: rawCategorieData)
+                guard let url = URL(string: "https://opentdb.com/api.php?amount=10&category=\(categoryNr)=10&difficulty=\(difficulty)") else {return}
+                guard let rawQuestionData = await NetworkService.getData(url) else {return}
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(QuestionList.self, from: rawQuestionData)
                 questions = result.results
             } catch {
                 fatalError("Error")
             }
         }
+        print(questions)
     }
     
     func getAnswersFromIndex(_ index: Int) -> [String] {
         var questionsList: [String] = questions[index].incorrectAnswer
         questionsList.append(questions[index].correctAnswer)
-//        for a in questions[index].incorrectAnswer {
-//            questionsList.append(a)
-//        }
+        //        for a in questions[index].incorrectAnswer {
+        //            questionsList.append(a)
+        //        }
         questionsList.shuffle()
         return questionsList
     }
@@ -80,6 +82,6 @@ class QuizController: ObservableObject{
     }
     
     
-
+    
     
 }

@@ -21,14 +21,12 @@ struct QuizView: View {
     @State var isAnswerShown = false
     @State var question: String = ""
     
-    init(difficulty: String, category: Category, currentQuestion: Int = 0, isAnswerShown: Bool = false) {
-        self.difficulty = difficulty
-        self.category = category
-        self.currentQuestion = currentQuestion
-        self.isAnswerShown = isAnswerShown
-        
-        
-    }
+    //    init(difficulty: String, category: Category, currentQuestion: Int = 0, isAnswerShown: Bool = false) {
+    //        self.difficulty = difficulty
+    //        self.category = category
+    //        self.currentQuestion = currentQuestion
+    //        self.isAnswerShown = isAnswerShown
+    //    }
     
     
     var body: some View {
@@ -39,17 +37,31 @@ struct QuizView: View {
             //            Text(difficulty)
             //            Text("Next step quizing")
             HStack{
-                Text("Question \(currentQuestion+1): \(question)")
+//                if quizController.questions.isEmpty {
+//                    Text("Loading...")
+//
+//                } else {
+                    Text("Question \(currentQuestion+1): \(question)")
                         .font(.title)
                         .padding()
+//                }
+                
+                
             }
+//            .task {
+//                quizController.fetchQuitions(categoryNr: String(currentQuestion), difficulty: difficulty)
+//                question = quizController.getQuestion(currentQuestion)
+//            }
+//            
             
             HStack{
                 Button(){
                     currentQuestion += 1
                     
                 }label: {
-                    Text("1:")
+                    Text("1:"
+//                         \(quizController.getAnswersFromIndex(currentQuestion)[0])
+                )
                 }
                 .buttonStyle(.bordered)
                 Button(){
@@ -77,12 +89,14 @@ struct QuizView: View {
                 
             }
         }
+        .onAppear(perform:{ quizController.fetchQuitions(categoryNr: String(category.id), difficulty: difficulty)})
     }
+    
 }
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
-       QuizView(difficulty: "easy", category: Category(9, "General Knowledge"))
+        QuizView(difficulty: "easy", category: Category(9, "General Knowledge"))
             .environmentObject(QuizController()).preferredColorScheme(.dark)
     }
 }
