@@ -18,28 +18,45 @@ struct QuizMenuView: View {
         case medium = "medium"
         case hard = "hard"
     }
-         
+    
     @State private var selectedDifficulty = Difficulty.easy
     
     @State var isQuestionsFetched: Bool = false
     
     var body: some View {
         NavigationView{
+            
+            //            if quizController.categories.isEmpty {
+            //                ProgressView()
+            //            } else {
+            
             ZStack{
                 Color(red: 10/100, green: 10/100, blue: 10/100)
-                    .frame(height: 150)
+                    .frame(height: 175)
                     .cornerRadius(5)
                 VStack{
-                    Picker("Select an categorie:",selection: $selectedOption) {
+                    
+                    // Todo: Bonus 1
+                    //                        if  quizController.categoriesCount.count != quizController.categories.count {
+                    //                            ProgressView()
+                    //                        } else {
+                    Picker("Select a category:",selection: $selectedOption) {
                         ForEach(quizController.categories) { cate in
-                            Text(cate.name)
-                        } 
+                            Text("\(cate.name):")
+//                            Todo: Bonus 1
+//                                 \(quizController.getCategoryCountByDifficulty(selectedDifficulty.rawValue, categoryId: cate.id))")
+                        }
                     }
                     .pickerStyle(.menu)
+                    Divider()
+                    
+                    //                        }
+                    
                     
                     HStack{
                         Text("Difficulty:")
-                        Picker("Select a Difficulty", selection: $selectedDifficulty) {
+                            .padding(.horizontal)
+                        Picker("Select a difficulty", selection: $selectedDifficulty) {
                             ForEach(Difficulty.allCases, id: \.self) { difficulty in
                                 Text(difficulty.rawValue)
                             }
@@ -48,39 +65,28 @@ struct QuizMenuView: View {
                         .padding(.horizontal)
                         .frame(alignment: .center)
                     }
+                    Divider()
                     Button(action: {
                         Task{
-            
+                            
                         }
                         
                         
                     }) {
                         NavigationLink(destination: QuizView(difficulty: selectedDifficulty.rawValue, category: quizController.getCategoryById(selectedOption))
-                            
+                                       
                         )
                         {
                             Text("Start Quiz")
+                                .frame(height: 10)
+
                         }
                     }
                     .padding(15)
                     .foregroundColor(Color.white)
                     .background(Color.accentColor)
                     .cornerRadius(5)
-                    //                    Button{
-                    //                        isSubmitted = true
-                    //                        NavigationLink{
-                    //                            testview()td)
-                    //                        }
-                    //                    } label: {
-                    //                        Text("Submit")
-                    //                            .font(.headline)
-                    //                            .foregroundColor(.white)
-                    //                            .padding()
-                    //                            .background(Color.blue)
-                    //                            .cornerRadius(10)
-                    //                    }
-                    //                    .frame(width: 900, height:  20, alignment: .center)
-                    //                    .padding()
+            
                     
                 }
                 
@@ -89,18 +95,27 @@ struct QuizMenuView: View {
             
             
         }
+        //    Todo: Bonus 1
         
-        //    Todo
+        //                        .onAppear{
+        //                            if (quizController.categories.count > 0){
+        //                                quizController.fetchCategoriesCount()
+        //                            }
+        //                        }
+        
     }
+    
+    
+    
 }
 
-    
-    
-    
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            QuizMenuView().environmentObject(QuizController())
-                .preferredColorScheme(.dark)
-        }
+
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuizMenuView().environmentObject(QuizController())
+            .preferredColorScheme(.dark)
     }
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07605BAD29C39C270062E5D0 /* CategoryCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07605BAC29C39C270062E5D0 /* CategoryCount.swift */; };
 		077AABE129B9C20F0078023F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AABE029B9C20F0078023F /* Assets.xcassets */; };
 		077AABE529B9C20F0078023F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AABE429B9C20F0078023F /* Preview Assets.xcassets */; };
 		077AABF729B9C2660078023F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AABEC29B9C2660078023F /* Question.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07605BAC29C39C270062E5D0 /* CategoryCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCount.swift; sourceTree = "<group>"; };
 		077AABD929B9C20D0078023F /* QuizDemoContinued.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizDemoContinued.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AABE029B9C20F0078023F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		077AABE229B9C20F0078023F /* QuizDemoContinued.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuizDemoContinued.entitlements; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				077AABED29B9C2660078023F /* CategoryList.swift */,
 				077AABEE29B9C2660078023F /* QuestionList.swift */,
 				077AABEF29B9C2660078023F /* Category.swift */,
+				07605BAC29C39C270062E5D0 /* CategoryCount.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				077AABFE29B9C2660078023F /* QuizView.swift in Sources */,
 				077AABF829B9C2660078023F /* CategoryList.swift in Sources */,
 				077AABFA29B9C2660078023F /* Category.swift in Sources */,
+				07605BAD29C39C270062E5D0 /* CategoryCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

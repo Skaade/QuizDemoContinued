@@ -16,6 +16,7 @@ struct QuizDemoApp: App {
     var body: some Scene {
         WindowGroup {
             QuizMenuView().environmentObject(quizController)
+                .preferredColorScheme(.dark)
         }
     }
 }
