@@ -128,6 +128,7 @@ struct QuizView: View {
                     }label: {
                         Text("1: \(answers[0])")}
                     .buttonStyle(.bordered)
+                    .disabled(isAnswerShown)
                     
                     
                     Button(){
@@ -159,6 +160,8 @@ struct QuizView: View {
                     }label: {
                         Text("2: \(answers[1])")}
                     .buttonStyle(.bordered)
+                    .disabled(isAnswerShown)
+
                 }
                 
                 .task {
@@ -193,6 +196,7 @@ struct QuizView: View {
                             
                             
                         }
+                        .disabled(isAnswerShown)
                         .buttonStyle(.bordered)
                         Button(){
                             rights[currentQuestion] = quizController.checkIfThisAnswerIsCorrect(answers[3], currentQuestion)
@@ -215,6 +219,7 @@ struct QuizView: View {
                             }
                         }label: {
                             Text("4: \(answers[3])")                    }
+                        .disabled(isAnswerShown)
                         .buttonStyle(.bordered)
                         
                     }
